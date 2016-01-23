@@ -36,28 +36,33 @@ describe("Huffmann tree", function() {
     expect(finalOccurrence).toEqual(orderOccurrences(occurrences));
   });
 
-  it("receive an ordered array of occurrences as '[['F', 1], ['E', 2], ['D', 3], ['C', 4], ['B', 5], ['A', 6]]' and return the combination of two lowerest", function() {
+  it("receive an ordered array of occurrences as '[['F', 1], ['E', 2], ['D', 3], ['C', 4], ['B', 5], ['A', 6]]' and return the combination", function() {
     var occurrences = [['F', 1], ['E', 2], ['D', 3], ['C', 4], ['B', 5], ['A', 6]],
         result = ['FE', 3];
-    expect(result).toEqual(combineTwoLowerests(occurrences));
+    expect(result).toEqual(combine(occurrences));
   })
 
   it("receive an array of occurrences with one element as '[['A', 6]]' and return the same element", function() {
     var occurrences = [['A', 6]],
         result = ['A', 6];
-    expect(result).toEqual(combineTwoLowerests(occurrences));
+    expect(result).toEqual(combine(occurrences));
   })
 
   it("receive an empty array of occurrences and return an empty array", function() {
     var occurrences = [],
         result = [];
-    expect(result).toEqual(combineTwoLowerests(occurrences));
+    expect(result).toEqual(combine(occurrences));
   })
 
-
-  it("receive an ordered array of occurrences as '[['FE', 3], ['D', 3], ['C', 4], ['B', 5], ['A', 6]]' and return the combination of two first", function() {
+  it("receive an ordered array of occurrences where the first two has a same number of occurrences as '[['FE', 3], ['D', 3], ['C', 4], ['B', 5], ['A', 6]]' and return the combination", function() {
     var occurrences = [['FE', 3], ['D', 3], ['C', 4], ['B', 5], ['A', 6]],
         result = ['FED', 6];
-    expect(result).toEqual(combineByOccurrences(occurrences));
+    expect(result).toEqual(combine(occurrences));
+  })
+
+  it("receive an ordered array of occurrences as '[['F', 1], ['E', 2], ['D', 3], ['C', 4], ['B', 5], ['A', 6]],' and return the tree", function() {
+    var occurrences = [['F', 1], ['E', 2], ['D', 3], ['C', 4], ['B', 5], ['A', 6]],
+        result = [['FEDA', 12, ['FED', 6, ['FE',3, ['F', 1], ['E', 2]], ['D', 3, null, null]], ['A', 6, null, null]], ['CB', 9, ['C', 4], ['B', 5]]];
+    expect(result).toEqual(makeTree(occurrences));
   })
 });
