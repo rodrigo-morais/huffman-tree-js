@@ -59,3 +59,21 @@ function combineTwoLowerests(occurrences) {
 	
 	return [first[0] + second[0], first[1] + second[1]];
 }
+
+function combineByOccurrences(occurrences) {
+	var first = occurrences.length > 0 ? occurrences.reverse().pop() : ['', 0],
+		similar = ['', 0];
+
+	occurrences.reverse();
+	while(occurrences.length > 0) {
+		if(occurrences[0][1] === first[1]) {
+			similar = occurrences[0];
+			occurrences = [];
+		}
+		else {
+			occurrences.pop();
+		}
+	}
+
+	return [first[0] + similar[0], first[1] + similar[1]];
+}
