@@ -35,4 +35,22 @@ describe("Huffmann tree", function() {
 
     expect(finalOccurrence).toEqual(orderOccurrences(occurrences));
   });
+
+  it("receive an ordered array of occurrences as '[['F', 1], ['E', 2], ['D', 3], ['C', 4], ['B', 5], ['A', 6]]' and return the combination of two lowerest", function() {
+    var occurrences = [['F', 1], ['E', 2], ['D', 3], ['C', 4], ['B', 5], ['A', 6]],
+        result = ['FE', 3];
+    expect(result).toEqual(combineTwoLowerests(occurrences));
+  })
+
+  it("receive an array of occurrences with one element as '[['A', 6]]' and return the same element", function() {
+    var occurrences = [['A', 6]],
+        result = ['A', 6];
+    expect(result).toEqual(combineTwoLowerests(occurrences));
+  })
+
+  it("receive an empty array of occurrences and return an empty array", function() {
+    var occurrences = [],
+        result = [];
+    expect(result).toEqual(combineTwoLowerests(occurrences));
+  })
 });

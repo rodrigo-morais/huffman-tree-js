@@ -50,3 +50,12 @@ function orderOccurrences(occurrences) {
 
 	return newOccurrences;
 }
+
+function combineTwoLowerests(occurrences) {
+	var first = occurrences.length > 0 ? occurrences[0] : ['', 0],
+		second = occurrences.length > 1 ? occurrences[1] : ['', 0];
+
+	if(occurrences.length === 0) return [];
+	
+	return [first[0] + second[0], first[1] + second[1]];
+}
