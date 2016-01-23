@@ -24,7 +24,6 @@ function getOccurrences(expression) {
 
 function orderOccurrences(occurrences) {
 	var newOccurrences = [];
-console.log(occurrences);
 	occurrences.forEach(function(occurrence) {
 		if(newOccurrences.length === 0) {
 			newOccurrences.push(occurrence);
@@ -34,7 +33,7 @@ console.log(occurrences);
 				length = newOccurrences.length;
 
 			while(length > position) {
-				if(newOccurrences[position][1] < occurrence[1]) {
+				if(newOccurrences[position][1] > occurrence[1]) {
 					newOccurrences.splice(position, 0, occurrence);
 					position = newOccurrences.length + 1;
 				}
