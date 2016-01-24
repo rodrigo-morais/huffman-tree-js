@@ -15,6 +15,13 @@ describe("Huffmann tree", function() {
     expect(result).toEqual(occurrences);
   });
 
+  it("receive a totally unordered expression as 'EAAEAACACBDCFDDBABBCB' and return an array with number of occurrences", function() {
+    var occurrences = getOccurrences('EAAEAACACBDCFDDBABBCB'),
+        result = [['E', 2], ['A', 6], ['C', 4], ['B', 5], ['D', 3], ['F', 1]];
+
+    expect(result).toEqual(occurrences);
+  });
+
   it("receive an unordered occurrences as '['E', 2], ['A', 6], ['C', 4], ['F', 1], ['D', 3], ['B', 5]]' and return an ordered array", function() {
     var occurrences = [['E', 2], ['A', 6], ['C', 4], ['F', 1], ['D', 3], ['B', 5]],
         finalOccurrence = [['F', 1], ['E', 2], ['D', 3], ['C', 4], ['B', 5], ['A', 6]];
@@ -68,6 +75,12 @@ describe("Huffmann tree", function() {
 
   it("receive an ordered expression as 'EEAAAAAACCCCFDDDBBBBB' and return the tree", function() {
     var expression = 'AAAAAABBBBBCCCCDDDEEF',
+        result = [ 'CBDFEA', 21, [ 'CB', 9, [ 'C', 4 ], [ 'B', 5 ] ], [ 'DFEA', 12, [ 'DFE', 6, [ 'D', 3 ], [ 'FE', 3, [ 'F', 1 ], [ 'E', 2 ] ] ], [ 'A', 6 ] ] ];
+    expect(result).toEqual(makeTree(expression));
+  })
+
+  it("receive a totally unordered expression as 'EAAEAACACBDCFDDBABBCB' and return the tree", function() {
+    var expression = 'EAAEAACACBDCFDDBABBCB',
         result = [ 'CBDFEA', 21, [ 'CB', 9, [ 'C', 4 ], [ 'B', 5 ] ], [ 'DFEA', 12, [ 'DFE', 6, [ 'D', 3 ], [ 'FE', 3, [ 'F', 1 ], [ 'E', 2 ] ] ], [ 'A', 6 ] ] ];
     expect(result).toEqual(makeTree(expression));
   })
