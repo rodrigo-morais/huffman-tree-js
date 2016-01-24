@@ -60,9 +60,39 @@ describe("Huffmann tree", function() {
     expect(result).toEqual(combine(occurrences));
   })
 
-  it("receive an ordered array of occurrences as '[['F', 1], ['E', 2], ['D', 3], ['C', 4], ['B', 5], ['A', 6]],' and return the tree", function() {
-    var occurrences = [['F', 1], ['E', 2], ['D', 3], ['C', 4], ['B', 5], ['A', 6]],
-        result = [['FEDA', 12, ['FED', 6, ['FE',3, ['F', 1], ['E', 2]], ['D', 3, null, null]], ['A', 6, null, null]], ['CB', 9, ['C', 4], ['B', 5]]];
-    expect(result).toEqual(makeTree(occurrences));
+  it("receive an expression as 'EEAAAAAACCCCFDDDBBBBB' and return the tree", function() {
+    var expression = 'EEAAAAAACCCCFDDDBBBBB',
+        result = [ 'CBDFEA', 21, [ 'CB', 9, [ 'C', 4 ], [ 'B', 5 ] ], [ 'DFEA', 12, [ 'DFE', 6, [ 'D', 3 ], [ 'FE', 3, [ 'F', 1 ], [ 'E', 2 ] ] ], [ 'A', 6 ] ] ];
+    expect(result).toEqual(makeTree(expression));
+  })
+
+  it("receive an ordered expression as 'EEAAAAAACCCCFDDDBBBBB' and return the tree", function() {
+    var expression = 'AAAAAABBBBBCCCCDDDEEF',
+        result = [ 'CBDFEA', 21, [ 'CB', 9, [ 'C', 4 ], [ 'B', 5 ] ], [ 'DFEA', 12, [ 'DFE', 6, [ 'D', 3 ], [ 'FE', 3, [ 'F', 1 ], [ 'E', 2 ] ] ], [ 'A', 6 ] ] ];
+    expect(result).toEqual(makeTree(expression));
+  })
+
+  it("receive an empty expression as '' and return the tree", function() {
+    var expression = '',
+        result = [];
+    expect(result).toEqual(makeTree(expression));
+  })
+
+  it("receive an expression with one elemenet as 'AAAAAA' and return the tree", function() {
+    var expression = 'AAAAAA',
+        result = [ 'A', 6 ];
+    expect(result).toEqual(makeTree(expression));
+  })
+
+  it("receive an expression with two elemenets as 'AAAAAABBBBB' and return the tree", function() {
+    var expression = 'AAAAAABBBBB',
+        result = [ 'BA', 11, [ 'B', 5] , [ 'A', 6 ]];
+    expect(result).toEqual(makeTree(expression));
+  })
+
+  it("receive an expression with three elemenets as 'AAAAAABBBBBCCCC' and return the tree", function() {
+    var expression = 'AAAAAABBBBBCCCC',
+        result = [ 'ACB', 15, [ 'A', 6 ], [ 'CB', 9, [ 'C', 4] , [ 'B', 5 ]]];
+    expect(result).toEqual(makeTree(expression));
   })
 });

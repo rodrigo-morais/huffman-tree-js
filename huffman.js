@@ -60,6 +60,33 @@ function combine(occurrences) {
 	return [first[0] + second[0], first[1] + second[1]];
 }
 
-function makeTree() {
-	return [['FEDA', 12, ['FED', 6, ['FE',3, ['F', 1], ['E', 2]], ['D', 3, null, null]], ['A', 6, null, null]], ['CB', 9, ['C', 4], ['B', 5]]];
+function makeTree(expression) {
+	var tree = [],
+		occurrences = orderOccurrences(getOccurrences(expression));
+
+	while(occurrences.length > 0) {
+		var combination = combine(occurrences);
+
+		if(occurrences.length > 1) {
+			combination
+				.push(
+					occurrences[0], 
+					occurrences[1]
+				);
+		}
+
+		occurrences.reverse().pop();
+		occurrences.pop();
+
+		if(occurrences.length > 0) {
+			occurrences.push(combination);
+		}
+		else {
+			tree = combination;
+		}
+
+		occurrences = orderOccurrences(occurrences);
+	}
+
+	return tree;	
 }
