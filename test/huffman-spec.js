@@ -114,4 +114,16 @@ describe("Huffmann tree", function() {
         result = [ 'ACB', 15, [ 'CB', 9, [ 'B', 5 ], [ 'C', 4]], [ 'A', 6 ]];
     expect(result).toEqual(makeTree(expression));
   })
+
+  it("receive an expression as 'AAAAAABBBBBCCCCDDDEEF' and return a list of bits", function() {
+    var expression = 'AAAAAABBBBBCCCCDDDEEF',
+        result = '000000000000101010101011111111010010010011001100111';
+    expect(result).toEqual(encode(expression));
+  })
+
+  it("receive an expression as 'EAAEAACACBDCFDDBABBCB' and return a list of bits", function() {
+    var expression = 'EAAEAACACBDCFDDBABBCB',
+        result = '011000000110000011001110010110111010010100010101110';
+    expect(result).toEqual(encode(expression));
+  })
 });

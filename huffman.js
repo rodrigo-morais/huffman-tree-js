@@ -90,3 +90,35 @@ function makeTree(expression) {
 
 	return tree;	
 }
+
+function _addBits(node, bits, list) {
+	if(node[2] === undefined) {
+		list.push([node[0], bits]);
+	}
+	else {
+		_addBits(node[2], bits + '0', list);
+		_addBits(node[3], bits + '1', list);
+	}
+}
+
+function _getBits(expression, list) {
+	var result = '';
+
+	expression.split('').forEach(function(letter) {
+		var value = list.filter(function(bits) {
+			return bits[0] === letter;
+		});
+		result = result + (value.length > 0 ? value[0][1] : '');
+	});
+
+	return result;
+}
+
+function encode(expression) {
+	var tree = makeTree(expression),
+		listOfBits = [];
+
+	_addBits(tree, '', listOfBits);
+
+	return _getBits(expression, listOfBits);
+}
