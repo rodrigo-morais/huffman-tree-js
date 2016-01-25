@@ -69,19 +69,25 @@ describe("Huffmann tree", function() {
 
   it("receive an expression as 'EEAAAAAACCCCFDDDBBBBB' and return the tree", function() {
     var expression = 'EEAAAAAACCCCFDDDBBBBB',
-        result = [ 'CBDFEA', 21, [ 'CB', 9, [ 'C', 4 ], [ 'B', 5 ] ], [ 'DFEA', 12, [ 'DFE', 6, [ 'D', 3 ], [ 'FE', 3, [ 'F', 1 ], [ 'E', 2 ] ] ], [ 'A', 6 ] ] ];
+        result = [ 'CBFEDA', 21, [ 'FEDA', 12, [ 'A', 6 ], [ 'FED', 6, [ 'D', 3 ], [ 'FE', 3, [ 'E', 2 ], [ 'F', 1 ] ] ] ], [ 'CB', 9, [ 'B', 5 ], [ 'C', 4 ] ] ];
     expect(result).toEqual(makeTree(expression));
   })
 
   it("receive an ordered expression as 'EEAAAAAACCCCFDDDBBBBB' and return the tree", function() {
     var expression = 'AAAAAABBBBBCCCCDDDEEF',
-        result = [ 'CBDFEA', 21, [ 'CB', 9, [ 'C', 4 ], [ 'B', 5 ] ], [ 'DFEA', 12, [ 'DFE', 6, [ 'D', 3 ], [ 'FE', 3, [ 'F', 1 ], [ 'E', 2 ] ] ], [ 'A', 6 ] ] ];
+        result = [ 'CBFEDA', 21, [ 'FEDA', 12, [ 'A', 6 ], [ 'FED', 6, [ 'D', 3 ], [ 'FE', 3, [ 'E', 2 ], [ 'F', 1 ] ] ] ], [ 'CB', 9, [ 'B', 5 ], [ 'C', 4 ] ] ];
     expect(result).toEqual(makeTree(expression));
   })
 
   it("receive a totally unordered expression as 'EAAEAACACBDCFDDBABBCB' and return the tree", function() {
     var expression = 'EAAEAACACBDCFDDBABBCB',
-        result = [ 'CBDFEA', 21, [ 'CB', 9, [ 'C', 4 ], [ 'B', 5 ] ], [ 'DFEA', 12, [ 'DFE', 6, [ 'D', 3 ], [ 'FE', 3, [ 'F', 1 ], [ 'E', 2 ] ] ], [ 'A', 6 ] ] ];
+        result = [ 'CBFEDA', 21, [ 'FEDA', 12, [ 'A', 6 ], [ 'FED', 6, [ 'D', 3 ], [ 'FE', 3, [ 'E', 2 ], [ 'F', 1 ] ] ] ], [ 'CB', 9, [ 'B', 5 ], [ 'C', 4 ] ] ];
+    expect(result).toEqual(makeTree(expression));
+  })
+
+  it("receive a expression as 'EAAEAAADFDDA' and return the tree in correct order", function() {
+    var expression = 'EAAEAAADFDDA',
+        result = [ 'FEDA', 12, [ 'A', 6 ], [ 'FED', 6, [ 'D', 3 ], [ 'FE', 3, [ 'E', 2 ], [ 'F', 1 ] ] ] ];
     expect(result).toEqual(makeTree(expression));
   })
 
@@ -99,13 +105,13 @@ describe("Huffmann tree", function() {
 
   it("receive an expression with two elemenets as 'AAAAAABBBBB' and return the tree", function() {
     var expression = 'AAAAAABBBBB',
-        result = [ 'BA', 11, [ 'B', 5] , [ 'A', 6 ]];
+        result = [ 'BA', 11, [ 'A', 6 ], [ 'B', 5]];
     expect(result).toEqual(makeTree(expression));
   })
 
   it("receive an expression with three elemenets as 'AAAAAABBBBBCCCC' and return the tree", function() {
     var expression = 'AAAAAABBBBBCCCC',
-        result = [ 'ACB', 15, [ 'A', 6 ], [ 'CB', 9, [ 'C', 4] , [ 'B', 5 ]]];
+        result = [ 'ACB', 15, [ 'CB', 9, [ 'B', 5 ], [ 'C', 4]], [ 'A', 6 ]];
     expect(result).toEqual(makeTree(expression));
   })
 });

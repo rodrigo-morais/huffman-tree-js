@@ -33,7 +33,7 @@ function orderOccurrences(occurrences) {
 				length = newOccurrences.length;
 
 			while(length > position) {
-				if(newOccurrences[position][1] > occurrence[1]) {
+				if(newOccurrences[position][1] >= occurrence[1]) {
 					newOccurrences.splice(position, 0, occurrence);
 					position = newOccurrences.length + 1;
 				}
@@ -70,8 +70,8 @@ function makeTree(expression) {
 		if(occurrences.length > 1) {
 			combination
 				.push(
-					occurrences[0], 
-					occurrences[1]
+					occurrences[1],
+					occurrences[0]
 				);
 		}
 
