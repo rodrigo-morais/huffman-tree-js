@@ -12,32 +12,12 @@ function getOccurrences(expression) {
 }
 
 function orderOccurrences(occurrences) {
-	var newOccurrences = [];
-	occurrences.forEach(function(occurrence) {
-		if(newOccurrences.length === 0) {
-			newOccurrences.push(occurrence);
+	return occurrences.sort(function(current, next) {
+		if(current[1] === next[1]) {
+			return -1;
 		}
-		else {
-			var position = 0,
-				length = newOccurrences.length;
-
-			while(length > position) {
-				if(newOccurrences[position][1] >= occurrence[1]) {
-					newOccurrences.splice(position, 0, occurrence);
-					position = newOccurrences.length + 1;
-				}
-				else {
-					position = position + 1;
-				}
-			}
-
-			if(newOccurrences.length === position) {
-				newOccurrences.push(occurrence);
-			}
-		}
+		return current[1] - next[1];
 	});
-
-	return newOccurrences;
 }
 
 function combine(occurrences) {
