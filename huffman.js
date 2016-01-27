@@ -14,7 +14,7 @@ function getOccurrences(expression) {
 function orderOccurrences(occurrences) {
 	return occurrences.sort(function(current, next) {
 		if(current[1] === next[1]) {
-			return -1;
+			return 1;
 		}
 		return current[1] - next[1];
 	});
@@ -32,32 +32,32 @@ function combine(occurrences) {
 function makeTree(expression) {
 	var tree = [],
 		occurrences = orderOccurrences(getOccurrences(expression));
+	
+	function recursive(occurrences) {
+		if(occurrences.length === 0) {
+			return [];
+		}
+		else if(occurrences.length === 1) {
+			return occurrences[0];
+		}
+		else {
+			var combination = combine(occurrences);
 
-	while(occurrences.length > 0) {
-		var combination = combine(occurrences);
-
-		if(occurrences.length > 1) {
 			combination
 				.push(
 					occurrences[1],
 					occurrences[0]
 				);
-		}
 
-		occurrences.reverse().pop();
-		occurrences.pop();
+			occurrences = occurrences.slice(2, occurrences.length);
 
-		if(occurrences.length > 0) {
-			occurrences.push(combination);
-		}
-		else {
-			tree = combination;
-		}
+			occurrences.unshift(combination);
 
-		occurrences = orderOccurrences(occurrences);
+			return recursive(orderOccurrences(occurrences));
+		}
 	}
 
-	return tree;	
+	return recursive(occurrences);
 }
 
 function _addBits(node, bits, list) {
