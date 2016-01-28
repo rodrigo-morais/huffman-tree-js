@@ -60,13 +60,12 @@ function makeTree(expression) {
 	return recursive(occurrences);
 }
 
-function _addBits(node, bits, list) {
+function _addBits(node, bits) {
 	if(node[2] === undefined) {
-		list.push([node[0], bits]);
+		return [[node[0], bits]];
 	}
 	else {
-		_addBits(node[2], bits + '0', list);
-		_addBits(node[3], bits + '1', list);
+		return _addBits(node[2], bits + '0').concat(_addBits(node[3], bits + '1'));
 	}
 }
 
@@ -87,7 +86,7 @@ function encode(expression) {
 	var tree = makeTree(expression),
 		listOfBits = [];
 
-	_addBits(tree, '', listOfBits);
+	listOfBits = _addBits(tree, '');
 
 	return _getBits(expression, listOfBits);
 }
