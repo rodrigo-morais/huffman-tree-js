@@ -70,16 +70,16 @@ function _addBits(node, bits) {
 }
 
 function _getBits(expression, list) {
-	var result = '';
-
-	expression.split('').forEach(function(letter) {
-		var value = list.filter(function(bits) {
-			return bits[0] === letter;
+	if(expression === '') {
+		return '';
+	}
+	else {
+		var bits = list.filter(function(node) {
+			return node[0] === expression.charAt(0);
 		});
-		result = result + (value.length > 0 ? value[0][1] : '');
-	});
 
-	return result;
+	 	return (bits.length > 0 ? bits[0][1] : '') + _getBits(expression.slice(1), list);
+	}
 }
 
 function encode(expression) {
