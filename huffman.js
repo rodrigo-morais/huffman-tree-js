@@ -83,10 +83,5 @@ function _getBits(expression, list) {
 }
 
 function encode(expression) {
-	var tree = makeTree(expression),
-		listOfBits = [];
-
-	listOfBits = _addBits(tree, '');
-
-	return _getBits(expression, listOfBits);
+	return _getBits(expression, _addBits(makeTree(expression), ''));
 }
